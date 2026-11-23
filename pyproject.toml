@@ -1,0 +1,33 @@
+[project]
+name = "tts-api"
+version = "0.1.0"
+description = "Local Thai-English speech API using Wayu-Paxa-TTS-Edge"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "wayu-tts",
+    "huggingface-hub>=0.34,<2",
+    "en-core-web-sm",
+    "torch>=2.2",
+    # tltk requires scikit-learn 1.2.x, whose wheels use the NumPy 1.x ABI.
+    "numpy>=1.26,<2",
+    # tltk imports pandas but does not declare it in its package metadata.
+    "pandas>=2.2,<3",
+    "soundfile>=0.13,<1",
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.34,<1",
+]
+
+[dependency-groups]
+dev = ["httpx"]
+
+[tool.uv.sources]
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }
+wayu-tts = { git = "https://github.com/wayu-research/wayu-tts-inference", rev = "07ab898d516649313926f0b843b809a962f993ad" }
+torch = [
+    { index = "pytorch-cpu", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

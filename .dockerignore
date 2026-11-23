@@ -1,0 +1,9 @@
+.git
+.venv
+models
+__pycache__
+*.py[cod]
+.env
+.env.*
+*.wav
+*.mp3

@@ -1,0 +1,11 @@
+services:
+  tts-api:
+    build:
+      context: .
+    image: tts-api:latest
+    ports:
+      - "${TTS_HOST:-127.0.0.1}:${TTS_PORT:-8000}:8000"
+
+    restart: unless-stopped
+    init: true
+
